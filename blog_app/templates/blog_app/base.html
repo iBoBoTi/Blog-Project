@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Blog</title>
+    
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    
+</head>
+<body>
+    <nav class='navbar navbar-expand-lg navbar-light' style="background-color: #e3f2fd;">
+        <h1><a href="{% url 'post-list' %}" class="navbar-brand">Django Blog</a></h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <p>Hi {{ user.username }}</p>
+                        </a>
+                        
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                            <a href="{% url 'post-new' %}" class="dropdown-item">+ New Blog Post</a>
+                            <a href="{% url 'password_change' %}" class="dropdown-item">Change Password</a>
+                            <div class="dropdown-divider"></div>
+                            <p><a href="{% url 'logout' %}" class="dropdown-item">Log out</a></p>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                <form class="form-inline ml-auto">
+                    <p>You are not logged in.</p>
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign Up</a>
+                </form>
+            {% endif %}
+        </div>
+    </nav>
+    <!-- <header>
+        <div class="nav-left">
+            <h1><a href="{% url 'post-list' %}" class="navbar-brand">Django Blog</a></h1>
+        </div>
+
+        <div class="nav-right">
+            <a href="{% url 'post-new' %}">+ New Blog Post</a>
+        </div>
+        
+    </header> -->
+    <!-- <section>
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}</p>
+            <p><a href="{% url 'logout' %}">Log out</a></p>
+        {% else %}
+            <p>You are not logged in.</p>
+            <a href="{% url 'login' %}">Log In</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </section> -->
+    <section>
+        <main class="container">
+            <article>
+                {% block content %}
+                {% endblock %}
+            </article>
+        </main>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
