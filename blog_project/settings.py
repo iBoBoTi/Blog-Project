@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = config('SECRET_KEY')
 config.encoding = 'cp1251'
 SECRET_KEY = config('SECRET_KEY')
-# SECRET_KEY = 'django-insecure-cpc!$a!*rs4-9(18$^kpr0bh4ylr&@kaf#7f26uf-@m_2iz4c^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=False)
